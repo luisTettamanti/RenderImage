@@ -53,6 +53,7 @@
         }
     
         function onFileSysSuccess(fileSystem) {
+            alert('file system open: ' + fileSystem.name);
             var root = fileSystem.root;
             var reader = root.createReader();
             
