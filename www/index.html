@@ -43,24 +43,23 @@
 </head>
 
 <body>
-    <img id="firsImage"/>
+    <img id="firstImage"/>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript">
-        document.addEventListener('deviceReady', onDeviceReady, false);
+        document.addEventListener('deviceready', onDeviceReady, false);
         
-        function onDeviceReady(){
-            window.requestFieSystem(localFileSystem.PERSISTENT, 0, onFileSysSuccess, onError);
+        function onDeviceReady() {
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSysSuccess, onError);
         }
-    
+     
         function onFileSysSuccess(fileSystem) {
-            alert('file system open: ' + fileSystem.name);
             var root = fileSystem.root;
             var reader = root.createReader();
             
             reader.readEntries(function(entries) {
                 for (var i = 0, entry; entry = entries[i]; i++) {
                     if (entry.isfile && (/\.(gif|jpg|jpeg|png)$/i).test(entry.name)){
-                        root.getFile(entry.name, {create:false, exclusive: false}, onGetFile, onError);
+                        root.getFile(entry.name, { create:false }, onGetFile, onError);
                         break;
                     }
                 }
@@ -68,7 +67,8 @@
         }
         
         function onGetFile(fileEntry) {
-            fileEntry.file(function(file){
+            alert('onGetFile...');
+/*            fileEntry.file(function(file){
                 var fReader = new FileReader();
                 fReader.onload = function(evt) {
                     var img = document.querySelector('#firstImage');
@@ -80,7 +80,7 @@
                 };
                 
                 fReader.readAsDataURL(file);
-            }, onError);
+            }, onError);*/
         }
             
         function onError(error) {
