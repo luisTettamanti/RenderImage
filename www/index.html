@@ -49,10 +49,9 @@
         document.addEventListener('deviceReady', onDeviceReady, false);
         
         function onDeviceReady(){
-            var size = 0;
-            window.requestFieSystem(localFileSystem, PERSISTENT, size, onFileSysSuccess, onError);
+            window.requestFieSystem(localFileSystem, PERSISTENT, 0, onFileSysSuccess, onError);
         }
-        
+    
         function onFileSysSuccess(fileSystem) {
             var root = fileSystem.root;
             var reader = root.createReader();
@@ -60,7 +59,7 @@
             reader.readEntries(function(entries) {
                 for (var i = 0, entry; entry = entries[i]; i++) {
                     if (entry.isfile && (/\.(gif|jpg|jpeg|png)$/i).test(entry.name)){
-                        root.getFile(entry.name, {create:false}, onGetFile, onError);
+                        root.getFile(entry.name, {create:false, exclusive: false}, onGetFile, onError);
                         break;
                     }
                 }
