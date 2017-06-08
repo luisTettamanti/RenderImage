@@ -49,7 +49,7 @@
         document.addEventListener('deviceReady', onDeviceReady, false);
         
         function onDeviceReady(){
-            window.requestFieSystem(localFileSystem, PERSISTENT, 0, onFileSysSuccess, onError);
+            window.requestFieSystem(localFileSystem.PERSISTENT, 0, onFileSysSuccess, onError);
         }
     
         function onFileSysSuccess(fileSystem) {
